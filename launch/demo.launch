@@ -1,3 +1,4 @@
 <launch>
 <node name="mycirc" pkg="demo1" type="circle_node" />
+<node name="rviz" pkg="rviz" type="rviz" args="-d $(find demo1)/config/circle_view.rviz" />
 </launch>
