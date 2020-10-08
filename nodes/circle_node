@@ -7,7 +7,7 @@ Publishers:
   ETC... 
 """
 import rospy
-
+from math import cos, sin, pi
 class Circle:
     def __init__(self, radius):
         """ a circle with a given radius
@@ -16,14 +16,14 @@ class Circle:
         """
         self._radius = radius
 
-    def circle(t):
+    def xy(self, t):
         """ a circle parameterized by time
             Args:
                 t (float): time in seconds
             Return:
                 tuple (x,y) coordinates of the circle at the given time
         """
-        return (cos(t) + abc, sin(t))
+        return (self._radius * cos(2*pi*t/100), self._radius *sin(2*pi*t/100))
 
 def main():
     rospy.init_node("circle_node")
@@ -31,7 +31,8 @@ def main():
     t = 0
     circ = Circle(2)
     while not rospy.is_shutdown():
-        rospy.loginfo(f"hello {t}")
+        x, y = circ.xy(t)
+        rospy.loginfo(f"hello {t} {x} {y} ")
         t += 1
         r.sleep()
 
