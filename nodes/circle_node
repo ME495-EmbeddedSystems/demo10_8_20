@@ -10,7 +10,12 @@ import rospy
 
 def main():
     rospy.init_node("circle_node")
-    rospy.logerror("hello")
+    r = rospy.Rate(10)
+    t = 0
+    while not rospy.is_shutdown():
+        rospy.loginfo(f"hello {t}")
+        t += 1
+        r.sleep()
 
 if __name__ == "__main__":
     main()
