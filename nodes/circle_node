@@ -46,9 +46,11 @@ def main():
         path.poses.append(PoseStamped(header = path.header, 
                                       pose=Pose(
                                           position = Point(x,y,1), 
-                                          orientation=Quaternion())))
+                                          orientation=Quaternion(0,0,0,1))))
         path_pub.publish(path)
         t += 1
+        if t == 100:
+            path.poses = []
         r.sleep()
 
 if __name__ == "__main__":
