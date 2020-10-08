@@ -1,0 +1,3 @@
+<launch>
+<node name="mycirc" pkg="demo1" type="circle_node" />
+</launch>
