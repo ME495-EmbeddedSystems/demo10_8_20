@@ -8,6 +8,8 @@ Publishers:
 """
 import rospy
 from math import cos, sin, pi
+from geometry_msgs.msg import Point
+
 class Circle:
     def __init__(self, radius):
         """ a circle with a given radius
@@ -26,12 +28,14 @@ class Circle:
         return (self._radius * cos(2*pi*t/100), self._radius *sin(2*pi*t/100))
 
 def main():
+    point_pub = rospy.Publisher("point", Point, queue_size=10)
     rospy.init_node("circle_node")
     r = rospy.Rate(10)
     t = 0
     circ = Circle(2)
     while not rospy.is_shutdown():
         x, y = circ.xy(t)
+        point_pub.publish(Point(x, y, 1))
         rospy.loginfo(f"hello {t} {x} {y} ")
         t += 1
         r.sleep()
