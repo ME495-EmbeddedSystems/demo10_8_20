@@ -30,15 +30,24 @@ class Circle:
 
 def main():
     point_pub = rospy.Publisher("point", Point, queue_size=10)
-    point_path = rospy.Publisher("path", Path, queue_size=10)
+    path_pub = rospy.Publisher("path", Path, queue_size=10)
     rospy.init_node("circle_node")
     r = rospy.Rate(10)
     t = 0
     circ = Circle(2)
+    path = Path()
+    path.poses = []
     while not rospy.is_shutdown():
         x, y = circ.xy(t)
         point_pub.publish(Point(x, y, 1))
         rospy.loginfo(f"hello {t} {x} {y} ")
+        path.header.stamp = rospy.Time.now()
+        path.header.frame_id = "map"
+        path.poses.append(PoseStamped(header = path.header, 
+                                      pose=Pose(
+                                          position = Point(x,y,1), 
+                                          orientation=Quaternion())))
+        path_pub.publish(path)
         t += 1
         r.sleep()
 
