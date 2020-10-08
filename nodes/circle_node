@@ -8,10 +8,28 @@ Publishers:
 """
 import rospy
 
+class Circle:
+    def __init__(self, radius):
+        """ a circle with a given radius
+            Args:
+                radius (float) - the radius of the circle
+        """
+        self._radius = radius
+
+    def circle(t):
+        """ a circle parameterized by time
+            Args:
+                t (float): time in seconds
+            Return:
+                tuple (x,y) coordinates of the circle at the given time
+        """
+        return (cos(t) + abc, sin(t))
+
 def main():
     rospy.init_node("circle_node")
     r = rospy.Rate(10)
     t = 0
+    circ = Circle(2)
     while not rospy.is_shutdown():
         rospy.loginfo(f"hello {t}")
         t += 1
